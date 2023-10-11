@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.cdnfonts.com/css/avenir" rel="stylesheet" />
+    <title>Mass Energy | Simulador</title>
+    <style>
+      h2 {
+        color: white;
+      }
+      .simulator-form {
+        display: flex;
+      }
+
+      .selecionaveis,
+      .digitaveis {
+        flex: 1;
+        padding: 1px;
+        width: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <img
+        src="mass_energy_logo_white.png"
+        alt="logo"
+        onclick="homePage()"
+        width="200"
+      />
+    </header>
+
+    <nav></nav>
+
+    <br />
+    <h2>Preencha os dados abaixo:</h2>
+    <main>
+      <form class="simulator-form">
+        <div class="selecionaveis">
+          <h2>Configurações</h2>
+          <br />
+          <label for="distribuidoras">Selecione a distribuidora</label>
+          <select id="distribuidoras">
+            <option value="" disabled selected hidden>Selecione</option>
+          </select>
+          <br /><br />
+
+          <label for="tensao">Tensão de fornecimento</label>
+          <select id="tensao">
+            <option value="" disabled selected hidden>Selecione</option>
+          </select>
+          <br /><br />
+
+          <label for="modalidade">Modalidade Tarifária</label>
+          <select id="modalidade">
+            <option value="" disabled selected hidden>Selecione</option>
+          </select>
+          <br /><br />
+          <label for="bandeira">Selecione a bandeira</label>
+          <select name="bandeira" id="bandeira">
+            <option value="" disabled selected hidden>Selecione</option>
+            <option value="Verde">Verde</option>
+            <option value="Amarela">Amarela</option>
+            <option value="Vermelha P1">Vermelha P1</option>
+            <option value="Vermelha P2">Vermelha P2</option>
+          </select>
+          <br /><br />
+          <h2>Premissas do ACL</h2>
+          <br />
+          <label for="preco-energia">Preço da Energia no ACL</label>
+          <input
+            type="number"
+            id="preco-energia"
+            placeholder="Ex: R$100 / MWh"
+          /><br /><br />
+
+          <label for="desconto-energia">Desconto da Energia</label>
+          <input
+            type="number"
+            id="desconto-energia"
+            placeholder="Ex: 15%"
+          /><br /><br />
+
+          <label for="fornecimento-acl">Tensão de fornecimento no ACL</label>
+          <select name="fornecimento-acl" id="fornecimento-acl">
+            <option value="" disabled selected hidden>Selecione</option>
+          </select>
+          <br /><br />
+
+          <label for="modalidade-acl">Modalidade tarifária no ACL</label>
+          <select name="modalidade-acl" id="modalidade-acl">
+            <option value="" disabled selected hidden>Selecione</option>
+          </select>
+          <br /><br />
+
+          <label for="custo-adicional">Custo adicional</label>
+          <select name="custo-adicional" id="custo-adicional">
+            <option value="" disabled selected hidden>Selecione</option>
+            <option value="sim">Sim</option>
+            <option value="nao">Não</option>
+          </select>
+          <br /><br />
+
+          <label for="custo-value">Valor do custo adicional</label>
+          <input
+            type="number"
+            name="custo-value"
+            id="custo-value"
+            placeholder="Ex: R$ 1.800,00"
+            disabled
+          />
+          <br /><br />
+
+          <h2>Projeção</h2>
+          <br />
+          <label for="tipo-calculo">Tipo de cálculo</label>
+          <select name="calculo" id="calculo">
+            <option value="" disabled selected hidden>Selecione</option>
+            <option value="tipo1">Tipo 1</option>
+            <option value="tipo2">Tipo 2</option>
+          </select>
+          <br /><br />
+          <label for="unidades-acl">Possui outras unidades ACL</label>
+          <select id="unidades-acl">
+            <option value="" disabled selected hidden>Selecione</option>
+            <option value="sim">Sim</option>
+            <option value="nao">Não</option>
+          </select>
+          <br /><br />
+          <label for="qtd-anos">Projetar para quantos anos ?</label>
+          <input type="number" id="qtd-anos" placeholder="Ex: 5" /><br /><br />
+
+          <label for="media-preco-energia">Média do preço da energia</label>
+          <input
+            type="number"
+            id="media-preco-energia"
+            placeholder="Ex: R$ 120,00"
+          />
+        </div>
+        <div class="digitaveis">
+          <h2>Consumo</h2>
+          <br />
+          <label for="demanda-ponta">Demanda Ponta</label>
+          <input
+            type="number"
+            id="demanda-ponta"
+            placeholder="Ex: 150 (kW)"
+            pattern="^\d{3}$"
+            required
+          /><br /><br />
+
+          <label for="demanda-fora-ponta">Demanda Fora Ponta</label>
+          <input
+            type="number"
+            id="demanda-fora-ponta"
+            placeholder="Ex: 330 (kW)"
+            pattern="^\d{3}$"
+            required
+          /><br /><br />
+
+          <label for="consumo-ponta">Consumo Ponta</label>
+          <input
+            type="number"
+            id="consumo-ponta"
+            placeholder="Ex: 7,90 (MWh)"
+            pattern="^\d{1,3}(?:,\d{2})?$"
+            required
+          /><br /><br />
+
+          <label for="consumo-fora-ponta">Consumo Fora Ponta</label>
+          <input
+            type="number"
+            id="consumo-fora-ponta"
+            placeholder="Ex: 62,87 (MWh)"
+            pattern="^\d{1,3}(?:,\d{2})?$"
+            required
+          /><br /><br />
+
+          <h2>Impostos</h2>
+          <br />
+          <label for="Impostos">Impostos no Cálculo</label>
+          <select id="impostos">
+            <option disabled selected hidden>Selecione</option>
+            <option>Com impostos</option>
+            <option>Sem impostos</option></select
+          ><br /><br />
+          <label for="icmsTusd">ICMS na TUSD</label>
+          <select id="icms-na-tusd" disabled>
+            <option disabled selected hidden>Selecione</option>
+            <option>Sim</option>
+            <option>Não</option>
+          </select>
+          <br /><br />
+          <label for="icms">ICMS</label><br />
+          <input type="number" id="icms" placeholder="Padrão: 25%" disabled />
+          <br /><br />
+
+          <label for="pis-cofins">PIS / COFINS</label><br />
+          <input
+            type="number"
+            id="pis-cofins"
+            placeholder="Padrão: 5%"
+            disabled
+          /><br /><br />
+
+          <label for="perdas">Porcentagem de perdas</label><br />
+          <input type="number" id="perdas" placeholder="Ex: 3%" /><br /><br />
+        </div>
+      </form>
+      <br /><br />
+      <button onclick="getInputs()">Projetar</button>
+    </main>
+    <footer>
+      Copyright &copy; 2022 Mass Energy - Todos os direitos reservados.
+    </footer>
+  </body>
+</html>
