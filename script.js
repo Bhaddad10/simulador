@@ -10,6 +10,10 @@ function goSimulator() {
   window.location.href = "simulador.html";
 }
 
+function goMedias() {
+  window.location.href = "medias.html";
+}
+
 function getUrlParameters() {
   var parameters = {};
   var queryString = window.location.search.substring(1);

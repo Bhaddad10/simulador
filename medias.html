@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.cdnfonts.com/css/avenir" rel="stylesheet" />
+    <title></title>
+
+    <style>
+      h1,
+      h2,
+      h3 {
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <header>Logo da empresa</header>
+
+    <nav></nav><br>
+    <h1>Médias de Demanda e Consumo</h1>
+    <main>
+      <div>
+        <h2>Demanda:</h2><br>
+        <label>Valores de demanda ponta</label>
+        <input
+          type="text"
+          id="valoresDemandaPonta"
+          placeholder="Ex:18.4, 25.5, 20.32, 34.4, 41.4"
+        />
+        <br /><br />
+        <label>Valores de demanda fora ponta</label>
+        <input
+          type="text"
+          id="valoresDemandaForaPonta"
+          placeholder="Ex:18.4, 25.5, 20.32, 34.4, 41.4"
+        />
+        <br /><br />
+        <h2>Consumo</h2><br>
+        <label>Valores de consumo ponta</label>
+        <input
+          type="text"
+          id="valoresConsumoPonta"
+          placeholder="Ex: 12.4, 13.5, 15.3, 18.5, 19.5"
+        />
+        <br /><br />
+        <label>Valores de consumo fora ponta</label>
+        <input
+          type="text"
+          id="valoresConsumoForaPonta"
+          placeholder="Ex: 12.4, 13.5, 15.3, 18.5, 19.5"
+        />
+        <br /><br />
+        <button onclick="extractNumbers()">Calcular</button><br /><br />
+        <h1>Resultados:</h1>
+        <br />
+        <h3>Média Demanda Ponta: <span id="mediaDemandaPonta">0</span> kW</h3>
+        <h3>
+          <br />
+          Média Demanda Fora Ponta: <span id="mediaDemandaForaPonta">0</span> kW
+        </h3>
+        <br />
+        <h3>Média Consumo Ponta: <span id="mediaConsumoPonta">0</span> mWH</h3>
+        <br />
+        <h3>
+          Média Consumo Fora Ponta:
+          <span id="mediaConsumoForaPonta">0</span> mWH
+        </h3>
+        <br />
+      </div>
+    </main>
+
+    <footer>Copyright &copy; 2023 - Todos os direitos reservados.</footer>
+  </body>
+  <script>
+    const mediaDp = document.getElementById("mediaDemandaPonta");
+    const mediaDfp = document.getElementById("mediaDemandaForaPonta");
+    const mediaConP = document.getElementById("mediaConsumoPonta");
+    const mediaConFp = document.getElementById("mediaConsumoForaPonta");
+
+    function extractNumbers() {
+      var demandaPonta = document.getElementById("valoresDemandaPonta").value;
+      var demandaForaPonta = document.getElementById(
+        "valoresDemandaForaPonta"
+      ).value;
+      var consumoPonta = document.getElementById("valoresConsumoPonta").value;
+      var consumoForaPonta = document.getElementById(
+        "valoresConsumoForaPonta"
+      ).value;
+
+      var mediadp = media(demandaPonta).toFixed(2);
+      var mediadfp = media(demandaForaPonta).toFixed(2);
+      var conp = media(consumoPonta).toFixed(2);
+      var confp = media(consumoForaPonta).toFixed(2);
+
+      mediaDp.textContent = mediadp;
+      mediaDfp.textContent = mediadfp;
+      mediaConP.textContent = conp;
+      mediaConFp.textContent = confp;
+    }
+
+    function media(input) {
+      const valores = input
+        .split(",")
+        .map((valor) => parseFloat(valor.trim()))
+        .filter((valor) => !isNaN(valor));
+
+      if (valores.length === 0) {
+        return "Nenhum número válido";
+      }
+
+      const soma = valores.reduce((acc, valor) => acc + valor, 0);
+      const media = soma / valores.length;
+
+      return media;
+    }
+  </script>
+</html>
